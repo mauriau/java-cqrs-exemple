@@ -1,4 +1,7 @@
-package com.techeventscare.command;
+package com.techeventscare.application.user.command;
+
+import com.techeventscare.application.bus.Command;
+import com.techeventscare.domain.user.User;
 import jakarta.validation.constraints.Email;
 
 public record CreateUserCommand(
@@ -6,4 +9,4 @@ public record CreateUserCommand(
      @Email(message = "Email non valide")
      String email,
      String password
-)implements CommandInterface {}
+)implements Command<User> {}

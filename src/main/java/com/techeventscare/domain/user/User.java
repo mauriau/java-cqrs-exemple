@@ -1,4 +1,4 @@
-package com.techeventscare.model;
+package com.techeventscare.domain.user;
 
 
 import jakarta.persistence.*;
