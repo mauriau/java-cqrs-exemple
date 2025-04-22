@@ -26,7 +26,7 @@ public class CreateUserController {
         CreateUserCommand command = new CreateUserCommand(
                 dto.username(), dto.email(), dto.password()
         );
-        User user = commandBus.dispatch(command);
+        User user = commandBus.send(command);
         return ResponseEntity.ok(user);
     }
 

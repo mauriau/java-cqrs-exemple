@@ -17,7 +17,7 @@ public class SimpleCommandBus implements CommandBus {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <R> R dispatch(Command<R> command) {
+    public <R> R send(Command<R> command) {
         String commandName = command.getClass().getSimpleName();
         String handlerBeanName = commandName.replace("Command", "Handler");
         handlerBeanName = Character.toLowerCase(handlerBeanName.charAt(0)) + handlerBeanName.substring(1);

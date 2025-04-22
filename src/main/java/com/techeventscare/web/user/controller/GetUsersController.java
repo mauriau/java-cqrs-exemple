@@ -1,5 +1,6 @@
 package com.techeventscare.web.user.controller;
 
+import com.techeventscare.application.bus.QueryBus;
 import com.techeventscare.application.user.handler.GetAllUsersQueryHandler;
 import com.techeventscare.application.user.query.GetAllUsersQuery;
 import com.techeventscare.domain.user.User;
@@ -10,15 +11,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 public class GetUsersController {
-    private final GetAllUsersQueryHandler getAllUsersQueryHandler;
+    private final QueryBus queryBus;
 
-    public GetUsersController(GetAllUsersQueryHandler getAllUsersQueryHandler) {
-        this.getAllUsersQueryHandler = getAllUsersQueryHandler;
+    public GetUsersController(QueryBus queryBus) {
+        this.queryBus = queryBus;
     }
 
     @GetMapping
     public List<User> getAllUsers() {
-        return getAllUsersQueryHandler.handle(new GetAllUsersQuery());
+        GetAllUsersQuery Query = new GetAllUsersQuery();
+        return queryBus.handle(Query);
     }
 
 }

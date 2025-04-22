@@ -3,7 +3,6 @@ package com.techeventscare.infrastructure.user;
 import com.techeventscare.domain.user.User;
 import com.techeventscare.domain.user.UserRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -40,6 +39,12 @@ public class JpaUserRepository implements UserRepository {
   @Override
   public Optional<User> findById(UUID id) {
     return springDataRepo.findById(id);
+  }
+
+  @Override
+  public Void deleteById(UUID id) {
+    springDataRepo.deleteById(id);
+    return null;
   }
 
 }

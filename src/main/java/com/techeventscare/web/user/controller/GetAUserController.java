@@ -1,6 +1,8 @@
 package com.techeventscare.web.user.controller;
 
+import com.techeventscare.application.bus.QueryBus;
 import com.techeventscare.application.user.handler.GetUserByIdQueryHandler;
+import com.techeventscare.application.user.query.GetAllUsersQuery;
 import com.techeventscare.application.user.query.GetUserByIdQuery;
 import com.techeventscare.domain.user.User;
 import org.springframework.data.crossstore.ChangeSetPersister;
@@ -14,14 +16,15 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/user")
 public class GetAUserController {
-    private final GetUserByIdQueryHandler getUserByIdQueryHandler;
+    private final QueryBus queryBus;
 
-    public GetAUserController(GetUserByIdQueryHandler getUserByIdQueryHandler) {
-        this.getUserByIdQueryHandler = getUserByIdQueryHandler;
+    public GetAUserController(QueryBus queryBus) {
+        this.queryBus = queryBus;
     }
 
     @GetMapping("/{id}")
     public User getUserById(@PathVariable UUID id) throws ChangeSetPersister.NotFoundException {
-        return getUserByIdQueryHandler.handle(new GetUserByIdQuery(id));
+        GetUserByIdQuery Query = new GetUserByIdQuery(id);
+        return queryBus.handle(Query);
     }
 }
