@@ -1,0 +1,15 @@
+package com.techeventscare.user.application.command;
+
+import com.techeventscare.common.application.bus.Command;
+import com.techeventscare.user.domain.User;
+import jakarta.validation.constraints.Email;
+
+import java.util.UUID;
+
+public record UpdateUserCommand(
+     UUID userId,
+     String username,
+     @Email(message = "Email non valide")
+     String email,
+     String password
+)implements Command<User> {}
